@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <link rel="stylesheet" href="./addRec.css">
+  
+  <title>Add Record</title>
+</head>
+<body>
+  <div class="nav-bar" >
+    <h1>Add New Record</h1>
+
+    <a href="./index.html" id="recordsBtn">
+      <button>Records</button>
+    </a>
+  </div>
+
+  <div class="forms">
+    <form id="recordForm">
+    <input type="text" id="name" placeholder="Name" required><br><br>
+    <input type="email" id="email" placeholder="Email" required><br><br>
+    <input type="password" id="password" placeholder="Password" required><br><br>
+    <select id="role" required>
+      <option value="">Select Role</option>
+      <option value="User">User</option>
+      <option value="Admin">Admin</option>
+    </select><br><br>
+    <button type="submit">Submit</button>
+  </form>
+  </div>
+
+  <script src="./addRec.js"></script>
+</body>
+</html>
