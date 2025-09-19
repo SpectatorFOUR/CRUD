@@ -1,20 +1,38 @@
-// addRec.js
+function saveRecord(newRecord, editIndex = null) {
+  let records = JSON.parse(localStorage.getItem('records')) || [];
 
-// Save record to localStorage
-function saveRecord(newRecord) {
-  const records = JSON.parse(localStorage.getItem('records')) || [];
-  records.push(newRecord);
+  if (editIndex !== null) {
+    // update existing record
+    records[editIndex] = newRecord;
+    localStorage.removeItem('editIndex'); // clear after editing
+  } else {
+    // add new record
+    records.push(newRecord);
+  }
+
   localStorage.setItem('records', JSON.stringify(records));
 }
 
-// Handle form submission
 document.addEventListener('DOMContentLoaded', () => {
   const form = document.getElementById('recordForm');
 
-  form.addEventListener('submit', (e) => {
-    e.preventDefault(); // stop page reload
+  // check if we are editing
+  const editIndex = localStorage.getItem('editIndex');
+  if (editIndex !== null) {
+    // prefill the form
+    const records = JSON.parse(localStorage.getItem('records')) || [];
+    const rec = records[editIndex];
+    if (rec) {
+      document.getElementById('name').value = rec.name;
+      document.getElementById('email').value = rec.email;
+      document.getElementById('password').value = rec.password;
+      document.getElementById('role').value = rec.role;
+    }
+  }
 
-    // Gather form values
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+
     const name = document.getElementById('name').value.trim();
     const email = document.getElementById('email').value.trim();
     const password = document.getElementById('password').value.trim();
@@ -22,13 +40,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (name && email && password && role) {
       const newRecord = { name, email, password, role };
-      saveRecord(newRecord);
-
-      // clear the form
+      saveRecord(newRecord, editIndex !== null ? parseInt(editIndex) : null);
       form.reset();
-
-      // Optionally show a success message
-      alert('Record added successfully!');
+      alert(editIndex !== null ? 'Record updated!' : 'Record added!');
     } else {
       alert('Please fill in all fields');
     }
