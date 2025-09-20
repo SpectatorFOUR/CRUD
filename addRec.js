@@ -2,11 +2,9 @@ function saveRecord(newRecord, editIndex = null) {
   let records = JSON.parse(localStorage.getItem('records')) || [];
 
   if (editIndex !== null) {
-    // update existing record
     records[editIndex] = newRecord;
-    localStorage.removeItem('editIndex'); // clear after editing
+    localStorage.removeItem('editIndex'); 
   } else {
-    // add new record
     records.push(newRecord);
   }
 
@@ -14,29 +12,28 @@ function saveRecord(newRecord, editIndex = null) {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-  const form = document.getElementById('recordForm');
+  const form = document.querySelector('#recordForm');
 
   // check if we are editing
   const editIndex = localStorage.getItem('editIndex');
   if (editIndex !== null) {
-    // prefill the form
     const records = JSON.parse(localStorage.getItem('records')) || [];
     const rec = records[editIndex];
     if (rec) {
-      document.getElementById('name').value = rec.name;
-      document.getElementById('email').value = rec.email;
-      document.getElementById('password').value = rec.password;
-      document.getElementById('role').value = rec.role;
-    }
+      document.querySelector('#name').value = rec.name;
+      document.querySelector('#email').value = rec.email;
+      document.querySelector('#password').value = rec.password;
+      document.querySelector('#role').value = rec.role;
+    }querySelector
   }
 
   form.addEventListener('submit', (e) => {
     e.preventDefault();
 
-    const name = document.getElementById('name').value.trim();
-    const email = document.getElementById('email').value.trim();
-    const password = document.getElementById('password').value.trim();
-    const role = document.getElementById('role').value;
+    const name = document.querySelector('#name').value.trim();
+    const email = document.querySelector('#email').value.trim();
+    const password = document.querySelector('#password').value.trim();
+    const role = document.querySelector('#role').value;
 
     if (name && email && password && role) {
       const newRecord = { name, email, password, role };

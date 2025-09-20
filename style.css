@@ -54,5 +54,37 @@ table {
     margin-top: 20px;
 }
 
+td:last-child {
+    text-align: center;
+}
 
 
+.action-btn {
+    padding: 6px 16px;
+    margin: 8px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background 0.3s, color 0.3s;
+}
+
+.editBtn {
+    background: #ffd966;
+    color: #333;
+}
+
+.editBtn:hover {
+    background: #ffe599;
+    color: #000;
+}
+
+.deleteBtn {
+    background: #ff6666;
+    color: #fff;
+}
+
+.deleteBtn:hover {
+    background: #d70000;
+    color: #fff;
+}

@@ -1,7 +1,5 @@
-// crud.js
-
 function renderTable() {
-  const tableBody = document.getElementById('tableBody');
+  const tableBody = document.querySelector('#tableBody');
   tableBody.innerHTML = '';
 
   const records = JSON.parse(localStorage.getItem('records')) || [];
@@ -23,15 +21,13 @@ function renderTable() {
     tableBody.appendChild(row);
   });
 
-  // attach click handlers for edit/delete after rows exist
+
   document.querySelectorAll('.editBtn').forEach(btn => {
     btn.addEventListener('click', e => {
       const idx = e.target.dataset.index;
 
-      // store index temporarily so addRec.html knows we’re editing
       localStorage.setItem('editIndex', idx);
 
-      // go to addRec.html by just clicking the hidden link (no window.location)
       const link = document.createElement('a');
       link.href = 'addRec.html';
       document.body.appendChild(link);
@@ -43,9 +39,9 @@ function renderTable() {
     btn.addEventListener('click', e => {
       const idx = e.target.dataset.index;
       const records = JSON.parse(localStorage.getItem('records')) || [];
-      records.splice(idx, 1); // remove the record
+      records.splice(idx, 1); 
       localStorage.setItem('records', JSON.stringify(records));
-      renderTable(); // refresh table
+      renderTable(); 
     });
   });
 }
